@@ -1,0 +1,17 @@
+<apex:page controller="CabinetController" showHeader="false" sidebar="false">
+    <div style="width:100px; position: absolute; right: 10px;">
+        <apex:form >
+            <div style="text-align: right">
+                <apex:commandButton style="width:70px; height: 40px" value="Log out" action="{!Logout}"/>
+            </div>
+        </apex:form>
+    </div>
+    <br/>
+    <apex:form >
+        <apex:pageBlock >
+            <h1 style="font-size:250%">First Name:{!contact.FirstName}</h1>
+            <br/>
+            <h1 style="font-size:250%">Last Name:{!contact.LastName}</h1>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

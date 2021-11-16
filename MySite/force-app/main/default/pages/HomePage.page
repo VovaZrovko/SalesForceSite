@@ -1,6 +1,21 @@
-<apex:page >
-<!-- Begin Default Content REMOVE THIS -->
-<h1>Congratulations</h1>
-This is your new Page
-<!-- End Default Content REMOVE THIS -->
+<apex:page controller="MyContactController" showHeader="false" sidebar="false">
+
+<div style="width:350px; margin-left:auto; margin-right:auto;">
+    <apex:form style="">
+        <apex:pageBlock title="Log in">
+            <apex:pageBlockSection >
+                <apex:inputField styleClass="{!classInputPostalCode}" value="{!con.Email}" required="true" />
+                <br/>
+                <apex:inputField styleClass="{!classInputPostalCode}" value="{!con.Password__c}" required="true"/>
+                <!--<apex:inputSecret styleClass="{!classInputPostalCode}" value="{!con.Password__c}" required="true" />-->
+                
+            </apex:pageBlockSection>
+            <apex:outputText value="{!errorMessage}" styleClass="errorMsg" rendered="{!LEN(errorMessage)>0}"/>
+            <div style="text-align: right">
+                <apex:commandButton value="ClickHere" action="{!Loggin}"/>
+            </div>
+
+        </apex:pageBlock>
+    </apex:form>
+</div>
 </apex:page>
