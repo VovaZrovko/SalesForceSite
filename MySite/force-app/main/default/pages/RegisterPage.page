@@ -1,0 +1,24 @@
+<apex:page controller="RegisterController" showHeader="false" sidebar="false">
+    <div style="width:350px; margin-left:auto; margin-right:auto;">
+        <apex:form style="">
+            <apex:pageBlock title="Registration">
+                <apex:pageBlockSection >
+                    <apex:inputField styleClass="{!classInputPostalCode}" value="{!con.FirstName}"/>
+                    <br/>
+                    <!--<apex:inputField styleClass="{!classInputLastName}" value="{!con.LastName}"/>-->
+                    <apex:inputText styleClass="{!classInputLastName}" value="{!con.LastName}"/>
+                    <br/>
+                    <apex:inputField styleClass="{!classInputEmail}" value="{!con.Email}" />
+                    <br/>
+                    <apex:inputField styleClass="{!classInputPassword}" value="{!con.Password__c}"/>
+                    
+                </apex:pageBlockSection>
+                <apex:outputText style="font-size:150%" value="{!errorMessage}" styleClass="errorMsg" rendered="{!LEN(errorMessage)>0}"/>
+                <div style="text-align: right">
+                    <apex:commandButton value="Back" action="{!Back}"/>
+                    <apex:commandButton value="Submit" action="{!Submit}"/>
+                </div>
+            </apex:pageBlock>
+        </apex:form>
+    </div>
+</apex:page>

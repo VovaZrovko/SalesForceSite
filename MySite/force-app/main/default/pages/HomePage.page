@@ -1,18 +1,21 @@
 <apex:page controller="MyContactController" showHeader="false" sidebar="false">
 
-<div style="width:350px; margin-left:auto; margin-right:auto;">
+<div style="width:450px; margin-left:auto; margin-right:auto;">
     <apex:form style="">
         <apex:pageBlock title="Log in">
+            <div style="text-align: right">
+                <apex:commandButton value="Register" action="{!Regist}"/>
+            </div>
             <apex:pageBlockSection >
-                <apex:inputField styleClass="{!classInputPostalCode}" value="{!con.Email}" required="true" />
+                <apex:inputField styleClass="{!classInputEmail}" value="{!con.Email}"/>
                 <br/>
-                <apex:inputField styleClass="{!classInputPostalCode}" value="{!con.Password__c}" required="true"/>
+                <apex:inputField styleClass="{!classInputPassword}" value="{!con.Password__c}"/>
                 <!--<apex:inputSecret styleClass="{!classInputPostalCode}" value="{!con.Password__c}" required="true" />-->
                 
             </apex:pageBlockSection>
             <apex:outputText value="{!errorMessage}" styleClass="errorMsg" rendered="{!LEN(errorMessage)>0}"/>
             <div style="text-align: right">
-                <apex:commandButton value="ClickHere" action="{!Loggin}"/>
+                <apex:commandButton value="Log in" action="{!Loggin}"/>
             </div>
 
         </apex:pageBlock>
