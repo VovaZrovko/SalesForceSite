@@ -14,8 +14,15 @@
                 
             </apex:pageBlockSection>
             <apex:outputText value="{!errorMessage}" styleClass="errorMsg" rendered="{!LEN(errorMessage)>0}"/>
-            <div style="text-align: right">
-                <apex:commandButton value="Log in" action="{!Loggin}"/>
+
+            <div style="display: table;margin-left:auto">
+                <div style="display: table-cell;">
+                    <apex:commandButton value="Forgot Password" action="{!ForgotPass}"/>
+                </div>
+                <div style="display: table-cell;">
+                    <apex:commandButton value="Log in" action="{!Loggin}"/>
+                </div>
+                
             </div>
 
         </apex:pageBlock>

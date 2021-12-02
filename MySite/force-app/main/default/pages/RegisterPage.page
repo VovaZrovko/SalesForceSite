@@ -6,7 +6,7 @@
                     <apex:inputField styleClass="{!classInputPostalCode}" value="{!con.FirstName}"/>
                     <br/>
                     <!--<apex:inputField styleClass="{!classInputLastName}" value="{!con.LastName}"/>-->
-                    <apex:inputText styleClass="{!classInputLastName}" value="{!con.LastName}"/>
+                    <apex:inputText styleClass="{!classInputLastName}" value="{!con.LastName}" />
                     <br/>
                     <apex:inputField styleClass="{!classInputEmail}" value="{!con.Email}" />
                     <br/>

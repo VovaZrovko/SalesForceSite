@@ -40,4 +40,7 @@ global class MyContactController {
     public PageReference Regist(){
         return new PageReference('/apex/RegisterPage');
     }
+    public PageReference ForgotPass(){
+        return new PageReference('/apex/PasswordRecoveryPage');
+    }
 }
