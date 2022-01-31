@@ -1,0 +1,40 @@
+<template>
+    <div style="height: 1200px;">
+        <lightning-card>
+            <lightning-button slot="actions" label="Log out"  onclick={logOut} class="slds-m-left_x-small"></lightning-button>
+            <div style="padding-left: 15px">
+                <h1 style="font-size:250%">First Name: {firstName}</h1>
+                <h1 style="font-size:250%;padding-top: 5px">Last Name:{lastName}</h1>
+            </div>
+        </lightning-card>
+        <div style="height: 800px;">
+            <lightning-card title="Information!">
+                <div slot="actions" style="padding: 10px;">
+                    <div class="row">
+                        <div class=“col-sm-8” style="padding-bottom: 4.6px;">
+                            <lightning-combobox id="budget" style="float:left;width:40%;padding:5px;" name="pbudget" label="Product Budget" value={valueBudget} options={budgetOptions} onchange={handleChange}></lightning-combobox>
+                        </div>
+                        <div class=“col-sm-8”>
+                            <label for="team">Team Members Count</label>
+                            <lightning-combobox id="team" style="float:left;width:40%;padding:5px;" variant="label-hidden" name="teamcount" label="" value={valueTeam} options={teamoOtions} onchange={handleChange}></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 500px;">
+                    <lightning-datatable hide-checkbox-column="true" key-field="id" columns={col} data={dataShow} onrowaction={changeName}></lightning-datatable>
+                </div>
+                <div class="slds-align_absolute-center" style="padding:5px;">
+                    <lightning-combobox id="client" style="width:20%;" name="client" label="Clients" value={valueClient} options={clients} onchange={handleChange}></lightning-combobox>
+                    <lightning-button label="Assign" style="padding-top: 24px;" onclick={assign} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button label="Send" style="padding-top: 24px;" onclick={send} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+    <div style="position: fixed;bottom:0;right:0;">
+        <c-assigned-form client={valueClient}></c-assigned-form>
+    </div>
+    <template if:true={error}>
+        <h1>Error - {error}</h1>
+    </template>
+</template>

@@ -32,8 +32,24 @@ public without sharing class PasswordRecoveryController {
         }
         return null;
     }
+    @AuraEnabled
+    public static String sendMSG(String email){
+        List<Contact> passList = [Select Password__c From Contact Where Email =:email Limit 1];
+        if(passList.size() > 0 && passList[0].Password__c != null){
+            String passWord = passList[0].Password__c;
+            Messaging.SendEmailResult[] results = sendMail(email, 'Your password ', passWord);
+            if (results[0].success) {
+                return 'The email was sent';
+            } else {
+                return ('error, the email failed to send: ' + results[0].errors[0].message);
+            }
+        }
+        else{
+            return 'error, cant find record or pass is null';
+        }
+    }
 
-    public Messaging.SendEmailResult[] sendMail(String address, String subject, String body) {
+    public static Messaging.SendEmailResult[] sendMail(String address, String subject, String body) {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         String[] toAddresses = new String[] {address};         
         mail.setToAddresses(toAddresses);

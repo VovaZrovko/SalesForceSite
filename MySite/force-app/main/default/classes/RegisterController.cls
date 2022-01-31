@@ -9,7 +9,10 @@ global class RegisterController {
         con = new Contact();
     }
     public PageReference Submit(){
-        if (String.isBlank(con.LastName)){
+        checkFieldBlank(con.LastName);
+        checkFieldBlank(con.Email);
+        checkFieldBlank(con.Password__c);
+        /*if (String.isBlank(con.LastName)){
             errorMessage = 'Input LastName';
             classInputLastName ='error'; 
             return null;
@@ -25,7 +28,7 @@ global class RegisterController {
             errorMessage = 'Input Password';
             classInputPassword ='error'; 
             return null;
-        }
+        }*/
 
         Contact[] contactList = [Select Id From Contact Where Email =:con.Email Limit 1];
         if(contactList.size() == 0){
@@ -39,9 +42,30 @@ global class RegisterController {
             return null;
         }
     }
+
+    public PageReference checkFieldBlank(String field){
+        if (String.isBlank(field)){
+            errorMessage = 'Input ';
+            classInputPassword ='error'; 
+            return null;
+        }
+        return null;
+    }
+
     public PageReference Back(){
         PageReference prefPage = new PageReference('/apex/HomePage');
         return prefPage;
     }
-
+    @AuraEnabled
+    public static Boolean createContact(String FName, String LName, String conEmail, String Password){
+        Contact[] contactList = [Select Id From Contact Where Email =:conEmail Limit 1];
+        if(contactList.size() == 0){
+            Contact con = new Contact(FirstName = FName, LastName = LName, Email = conEmail, Password__c = Password);
+            insert con;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

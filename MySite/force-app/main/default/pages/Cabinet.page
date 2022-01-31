@@ -14,8 +14,9 @@
             <h1 style="font-size:250%">Last Name:{!contact.LastName}</h1>
         </apex:pageBlock>
     </apex:form>
+    <apex:pageMessages id="pageMessages" />
     <apex:form >
-        <apex:pageBlock title="Information!" id="pjtable">
+        <apex:pageBlock title="Information" id="pjtable">
             <apex:pageBlockSection >
                 <apex:pageBlockSectionItem >
                     <apex:outputLabel value="{!$ObjectType.Product__c.Fields.Product_Budget__c.label}" />
@@ -32,42 +33,59 @@
                     </apex:selectList>
                 </apex:pageBlockSectionItem>
             </apex:pageBlockSection>
-            <apex:pageBlockTable value="{!pjList}" var="pj">
-                <apex:column headerValue="Checked">
-                    <apex:inputCheckbox value='{!IsChecked}'/>
+            <apex:pageBlockTable value="{!wrapperList}" var="pj">
+                <apex:column headerValue="{!$ObjectType.Product_Assignment__c.Fields.IsChecked__c.label}">
+                    <apex:inputCheckbox disabled="{!pj.toDisable}" value="{!pj.pjList.IsChecked__c}" />
                 </apex:column>
                 <apex:column headerValue="{!$ObjectType.Product__c.Fields.Name.label}">
-                    <apex:outputField value="{!pj.Product__r.Name}" />
+                    <apex:outputField value="{!pj.pjList.Product__r.Name}" />
                 </apex:column>
                 <apex:column headerValue="{!$ObjectType.Product__c.Fields.Is_Billable__c.label}">
-                    <apex:outputField value="{!pj.Product__r.Is_Billable__c}" />
+                    <apex:outputField value="{!pj.pjList.Product__r.Is_Billable__c}" />
                 </apex:column>
                 <apex:column headerValue="Team Members">
-                    <apex:outputField value="{!pj.Team__r.Developer_1__c}" />
-                    <apex:outputField value="{!pj.Team__r.Developer_2__c}" />
-                    <apex:outputField value="{!pj.Team__r.Project_Manager__c}" />
+                    <apex:outputField value="{!pj.pjList.Team__r.Developer_1__c}" />
+                    <apex:outputField value="{!pj.pjList.Team__r.Developer_2__c}" />
+                    <apex:outputField value="{!pj.pjList.Team__r.Project_Manager__c}" />
                 </apex:column>
                 <apex:column headerValue="{!$ObjectType.Product__c.Fields.Product_Budget__c.label}">
-                    <apex:outputField value="{!pj.Product__r.Product_Budget__c}" />
+                    <apex:outputField value="{!pj.pjList.Product__r.Product_Budget__c}" />
                 </apex:column>
                 <apex:column headerValue="{!$ObjectType.Product__c.Fields.Start_Date__c.label}">
-                    <apex:outputField value="{!pj.Product__r.Start_Date__c}" />
+                    <apex:outputField value="{!pj.pjList.Product__r.Start_Date__c}" />
                 </apex:column>
-                
             </apex:pageBlockTable>
+            <div style="text-align:center">
+                <apex:outputLabel style="margin-right:5px" value="Clients" />
+
+                <apex:selectList value="{!selectedClientId}" size="1" >
+                    <apex:selectOptions value="{!ClientsOptions}" />
+                    <apex:actionSupport action="{!SelectClient}" event="onchange" reRender="pjtable" />
+                </apex:selectList>
+
+                <apex:commandButton style="margin-left:5px" value="Assign" action="{!AssignClients}"/>
+                <apex:commandButton style="margin-left:5px" value="Post" action="{!PostSocial}"/>
+            </div>
         </apex:pageBlock>
-        <center>
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="2">
+                <apex:inputText style="margin-right: auto;margin-left: auto;" value="{!messageToSocial}" rendered="{!isGetCode}"/>
+                <br/>
+                <apex:commandButton style="margin-right: auto;margin-left: auto;" value="Send" action="{!MakeCall}"  rendered="{!isGetCode}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <!--<center>
             <apex:panelGrid id="pagination" columns="9" >
-            <apex:commandButton value="<< First" disabled="{!hasPrevious==false}" action="{!first}" reRender="pageMessages, pagination, orderItemTable" />
+            <apex:commandButton value="<< First" disabled="{!hasPrevious==false}" action="{!first}" reRender="pagination, orderItemTable" />
             <span>&nbsp;&nbsp;</span>
-            <apex:commandButton value="< Previous" disabled="{!hasPrevious==false}" action="{!previous}" reRender="pageMessages, pagination, orderItemTable" />
+            <apex:commandButton value="< Previous" disabled="{!hasPrevious==false}" action="{!previous}" reRender="pagination, orderItemTable" />
             <span>&nbsp;&nbsp;</span>
             <span>Page {!pageNumber} of {!totalPages}</span>
             <span>&nbsp;&nbsp;</span>
-            <apex:commandButton value="Next >" disabled="{!hasNext==false}" action="{!next}" reRender="pageMessages, pagination, orderItemTable" />
+            <apex:commandButton value="Next >" disabled="{!hasNext==false}" action="{!next}" reRender="pagination, orderItemTable" />
             <span>&nbsp;&nbsp;</span>
-            <apex:commandButton value="Last >>" disabled="{!hasNext==false}" action="{!last}" reRender="pageMessages, pagination, orderItemTable" />
+            <apex:commandButton value="Last >>" disabled="{!hasNext==false}" action="{!last}" reRender="pagination, orderItemTable" />
             </apex:panelGrid>
-        </center>
+        </center>-->
     </apex:form>
 </apex:page>

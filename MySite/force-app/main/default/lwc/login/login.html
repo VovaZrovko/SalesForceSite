@@ -1,0 +1,21 @@
+<template>
+    <div style="width:600px; margin-left:auto; margin-right:auto;">
+        <lightning-card title="Log In!">
+            <lightning-button slot="actions" label="Registratiion"  onclick={handleClick1}></lightning-button>
+            <div style="width:500px; margin-left:auto; margin-right:auto;">
+                <div style="width:400px">
+                    <lightning-input class="input" type="email" label="Email" value={yourEmail}></lightning-input>
+                    <lightning-input class="input" type="text" label="Password" value={yourPass} autocomplete="new-password"></lightning-input>
+                </div>
+                <div style="display: table;margin-left:auto; padding-top:10px">
+                    <div style="display: table-cell;">
+                        <lightning-button label="Forgot Password"  onclick={handleClick2}></lightning-button>
+                    </div>
+                    <div style="display: table-cell;padding-left:5px">
+                        <lightning-button label="Log In"  onclick={handleClick3}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

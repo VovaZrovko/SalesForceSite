@@ -43,4 +43,12 @@ global class MyContactController {
     public PageReference ForgotPass(){
         return new PageReference('/apex/PasswordRecoveryPage');
     }
+    @AuraEnabled
+    public static String LogInSys(String email, String pass){
+        Contact[] existCon = [Select Id, LastName, FirstName From Contact Where (Email =:email And Password__c =:pass) Limit 1];
+        if (existCon.size() == 1){
+            return existCon[0].FirstName + ',' + existCon[0].LastName;
+        }
+        return '';
+    }
 }

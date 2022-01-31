@@ -1,0 +1,14 @@
+<template>
+    <template if:false={isLoading}>
+        <lightning-card title={clientName} icon-name="custom:custom14">
+            <lightning-button-icon slot="actions" icon-name="utility:close" variant="bare" onclick={exit} alternative-text="Close window"></lightning-button-icon>
+            <ul class="slds-m-around_medium">
+                <template for:each={fields} for:item="item">
+                    <li key={item.Id}>
+                        <b>Product:</b> {item.Product__r.Name}, <b>Team:</b> {item.Team__r.Name}, <b>Is Billiable:</b> {item.Product__r.Is_Billable__c}
+                    </li>
+                </template>
+            </ul>
+        </lightning-card>
+    </template> 
+</template>
