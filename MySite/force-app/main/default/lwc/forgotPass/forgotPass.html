@@ -3,7 +3,7 @@
         <div style="width:350px; margin-left:auto; margin-right:auto;">
             <lightning-input class="input" type="email" label="Email" value={yourEmail} onchange={handleChange}></lightning-input>
             <div style="text-align: right; padding-top:10px">
-                <lightning-button label="Back"  onclick={Back} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button label="Back" data-id="back" onclick={Back} class="slds-m-left_x-small"></lightning-button>
                 <lightning-button label="Send" data-id="send"  onclick={handleClick1} class="slds-m-left_x-small"></lightning-button>
             </div>
         </div>
